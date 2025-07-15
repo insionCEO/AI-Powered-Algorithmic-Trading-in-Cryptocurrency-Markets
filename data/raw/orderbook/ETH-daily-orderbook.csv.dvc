@@ -1,0 +1,4 @@
+outs:
+- md5: 1418d0925ce07906029216492d3f43d6
+  size: 3662484209
+  path: ETH-daily-orderbook.csv

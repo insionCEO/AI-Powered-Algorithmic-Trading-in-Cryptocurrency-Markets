@@ -1,0 +1,4 @@
+outs:
+- md5: b2f03d9eaaeafafab6943b3081b0e349
+  size: 3302382
+  path: processed-data-test-BTC-3-day.csv

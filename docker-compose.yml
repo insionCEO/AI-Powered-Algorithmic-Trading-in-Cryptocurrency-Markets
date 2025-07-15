@@ -1,0 +1,21 @@
+version: "2"
+services:
+  server:
+    build: .
+    image: tradeaicr.azurecr.io/tradeai:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 6G
+    ports:
+      - "80:80"
+    volumes:
+      - tradeai-volume:/app/data/processed/10-min-samples/
+
+volumes:
+  tradeai-volume:
+    driver: azure_file
+    driver_opts:
+      share_name: tradeai-fileshare
+      storage_account_name: tradeaistorage

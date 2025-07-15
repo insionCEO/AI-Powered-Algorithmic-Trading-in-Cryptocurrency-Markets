@@ -1,618 +1,122 @@
-# Macross
+# TradeAI: Advancing Algorithmic Trading Systems with Deep Learning for Cryptocurrency Data
 
-The Macross Web Framework By Insion
+## Introduction
 
-If you are using standard http, you may use a similar macross package [makross](https://github.com/insionng/makross) which is adapted from Macross.
+Integrating deep learning methods into algorithmic trading systems is revolutionizing the financial industry. It has opened up sophisticated analysis and decision-making capabilities that were once limited to institutional investors, making them accessible to retail investors. However, the application of deep learning in medium-frequency trading (1-30 seconds), especially in the cryptocurrency market, remains largely unexplored.
 
-## Requirements
+This research project aims to bridge this gap by investigating the feasibility and effectiveness of integrating deep learning methods into an algorithmic trading system specifically tailored for cryptocurrency trading. [Full Paper Here](docs/documents/Final_Report.pdf)
 
-Go 1.7.4 or above.
 
-## Installation
+## Research Objectives
 
-Run the following command to install the package:
+- Explore the application of deep learning methods in medium-frequency cryptocurrency trading.
+- Develop a comprehensive full-stack algorithmic trading system.
+- Investigate novel transformer architectures, including Informer, Pyraformer, and an enhanced original transformer, for cryptocurrency price prediction.
+- Compare the performance of these transformer models with traditional ARIMA models, particularly when operating on larger datasets.
+- Integrate predictive signals from these models into a Deep Reinforcement Learning (DRL) framework for effective order generation and decision-making.
 
-```
-go get -u github.com/insionng/macross
-```
+## Research Findings
+This study explored the feasibility of developing a full-stack algorithmic trading system capable of running deep-learning-based trading strategies on Cryptocurrency limit order book data.
 
-## Getting Started
+- Transformer models (Informer, Pyraformer, enhanced original transformer) outperformed traditional ARIMA models in capturing intricate patterns in cryptocurrency price data.
+- The Pyraformer model exhibited the best performance, showcasing superior predictive accuracy and shorter training and inference times.
+- Integrating predictive signals from these models into a Deep Reinforcement Learning (DRL) framework enhanced order generation and decision-making capabilities.
+- The algorithmic trading system showed promising results, with potential for further tuning and improvement.
 
-Create a `server.go` file with the following content:
+## Methods
+Predictive models are a powerful tool for accurately predicting future events or outcomes based on
+historical data. With the increasing availability of large and complex datasets, advanced machine-learning
+techniques have become essential for extracting meaningful insights and making informed decisions. This
+study conducted an extensive literature review to identify a range of predictive models, including the
+Transformer, Informer, and Pyraformer. These models have demonstrated impressive performance in
+learning complex patterns from historical data and accurately forecasting future trends
+### Transformer Models
 
-```go
-package main
+#### Transformer
 
-import (
-	"github.com/insionng/macross"
-)
+The Transformer is a foundational deep learning architecture that has revolutionized natural language processing and time series analysis. In this study, we explored its application to cryptocurrency price forecasting. The Transformer's core components, such as self-attention and multi-head attention, allow it to capture complex patterns in historical data.
 
-func main() {
-	m := macross.New()
-	
-	m.Get("/", func(self *macross.Context) error {
-		return self.String("Hello, Macross")
-	})
+![Transformer Image](docs/images/transformer.png)
 
-	m.Listen(9000)
-}
-```
+#### Informer
 
-Now run the following command to start the Web server:
+Informer is a specialized time-series transformer architecture designed explicitly for forecasting tasks. It addresses some of the limitations of the original Transformer when dealing with long sequences of data. Informer introduces innovative positional encoding techniques and self-attention distillation to improve its performance in capturing temporal dependencies.
 
-```
-go run server.go
-```
+![Informer Image](docs/images/informer.png)
 
-You should be able to access URLs such as `http://localhost:9000`.
+#### Pyraformer
 
+Pyraformer is a novel pyramidal attention-based Transformer model tailored for time series data. It aims to efficiently capture long-range dependencies while maintaining low computational complexity. Pyraformer introduces the Coarser-Scale Construction Module (CSCM) and the Pyramidal Attention Module (PAM) to achieve these objectives.
 
-## Getting Started via JWT
+![Pyraformer Image](docs/images/pyraformer.png)
 
-```go
-package main
+## Ideas for Future Work
 
-import (
-	"fmt"
-	"github.com/insionng/macross"
-	"github.com/insionng/macross/cors"
-	"github.com/insionng/macross/jwt"
-	"github.com/insionng/macross/logger"
-	"github.com/insionng/macross/recover"
-	"time"
-)
+In the realm of future work, several key areas can be explored to further enhance the performance and capabilities of algorithmic trading systems:
 
-/*
-curl -I -X GET http://localhost:9000/jwt/get/ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjEsImV4cCI6MTQ3OTQ4NDUzOH0.amQOtO0GESwLoevaGSoR55jCUqZ6vsIi9DPTkDh4tSk"
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0    26    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0HTTP/1.1 200 OK
-Server: Macross
-Date: Fri, 18 Nov 2016 15:55:18 GMT
-Content-Type: application/json; charset=utf-8
-Content-Length: 26
-Vary: Origin
-Access-Control-Allow-Origin: *
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySWQiOjEsImV4cCI6MTQ3OTQ4NDU3OH0.KBTm7A3xqWmQ6NLfUecfowgszfKzwMrjO3k0gf8llc8
-*/
+- Explore the influence of dataset size on the performance of transformer models, including larger datasets spanning durations of 3 or 7 days.
+- Investigate the effectiveness of time-series transformers in predicting both high-frequency and long-frequency data to understand their scalability.
+- Conduct a comprehensive analysis between transformer models and state-of-the-art LSTM models to determine their strengths and weaknesses.
+- Implement sentiment analysis techniques to augment forecasting models by integrating contextual information from social media and news.
+- Experiment with different neural network architectures, such as convolutional neural networks (CNNs) and recurrent neural networks (RNNs), for improved prediction capabilities.
+- Further enhance the market simulation for more accurate trading environments.
+- Ready the trading system for live trading by handling real-time market data feeds and optimizing execution modules.
+- Explore the potential for evolving the system into an algorithmic-trading-as-a-service paradigm, particularly if it progresses toward an MLOps level 2 classification and establishes microservice scalability rules.
 
-func main() {
-	m := macross.New()
-	m.Use(logger.Logger())
-	m.Use(recover.Recover())
-	m.Use(cors.CORS())
+These directions for future research highlight the potential for continued innovation and improvement in algorithmic cryptocurrency trading.
 
-	m.Get("/", func(self *macross.Context) error {
-		fmt.Println(self.Response.Header.String())
-		var data = map[string]interface{}{}
-		data["version"] = "1.0.0"
-		return self.JSON(data)
-	})
 
-	var secret = "secret"
-	var exprires = time.Minute * 1
-	// 给用户返回token之前请先密码验证用户身份
-	m.Post("/signin/", func(self *macross.Context) error {
+## Setup
 
-		fmt.Println(self.Response.String())
+- Setup Commands
 
-		username := self.Args("username").String()
-		password := self.Args("password").String()
-		if (username == "insion") && (password == "PaSsworD") {
-			claims := jwt.NewMapClaims()
-			claims["UserId"] = 1
-			claims["exp"] = time.Now().Add(exprires).Unix()
+  ```
+  conda create -n tradeai python=3.8 -y
 
-			tk, _ := jwt.NewTokenString(secret, "HS256", claims)
+  conda activate tradeai
 
-			var data = map[string]interface{}{}
-			data["token"] = tk
+  pip install --upgrade pip setuptools wheel
 
-			return self.JSON(data)
-		}
+  pip install -r requirements.txt
 
-		herr := new(macross.HTTPError)
-		herr.Message = "ErrUnauthorized"
-		herr.Status = macross.StatusUnauthorized
-		return self.JSON(herr, macross.StatusUnauthorized)
+  sudo apt-get install git-lfs (linux)
 
-	})
+  brew install git-lfs (homebrew)
 
-	g := m.Group("/jwt", jwt.JWT(secret))
-	// http://localhost:9000/jwt/get/
-	g.Get("/get/", func(self *macross.Context) error {
+  choco install git-lfs (microsoft)
+  ```
 
-		var data = map[string]interface{}{}
+- Running TradeAI (locally and in container)
 
-		claims := jwt.GetMapClaims(self)
-		jwtUserId := claims["UserId"].(float64)
-		fmt.Println(jwtUserId)
-		exp := int64(claims["exp"].(float64))
-		exptime := time.Unix(exp, 0).Sub(time.Now())
+  ```
+  ./run_locally.sh
+  ```
 
-		if (exptime > 0) && (exptime < (exprires / 3)) {
-			fmt.Println("exptime will be expires")
-			claims["UserId"] = 1
-			claims["exp"] = time.Now().Add(exprires).Unix()
+- Run Client (connecting to local TradeAI)
 
-			token := jwt.NewToken("HS256", claims)
-			tokenString, _ := token.SignedString([]byte(secret))
-
-			self.Response.Header.Set(macross.HeaderAccessControlExposeHeaders, "Authorization")
-			self.Response.Header.Set("Authorization", jwt.Bearer+" "+tokenString)
-			self.Set(jwt.DefaultJWTConfig.ContextKey, token)
-		}
+  ```
+  npm install
 
-		data["value"] = "Hello, Macross"
-		return self.JSON(data)
-	})
+  npm start
+  ```
 
-	m.Listen(":9000")
-}
-```
+- Running TradeAI (in azure; extra requirements: docker, docker-compose, az)
 
+  ```
+  ./run_in_azure.sh
+  ```
 
-## Getting Started via Session
+- How to use DVC to manage data
 
-```go
-package main
+  1. Ask to be added to DVC remote repository
 
-import (
-	"github.com/insionng/macross"
-	"github.com/insionng/macross/recover"
-	"github.com/macross-contrib/session"
-	_ "github.com/macross-contrib/session/redis"
-	"log"
-)
-
-func main() {
-
-	v := macross.New()
-	v.Use(recover.Recover())
-	//v.Use(session.Sessioner(session.Options{"file", `{"cookieName":"MacrossSessionId","gcLifetime":3600,"providerConfig":"./data/session"}`}))
-	v.Use(session.Sessioner(session.Options{"redis", `{"cookieName":"MacrossSessionId","gcLifetime":3600,"providerConfig":"127.0.0.1:6379"}`}))
-
-	v.Get("/get", func(self *macross.Context) error {
-		value := "nil"
-		valueIf := self.Session.Get("key")
-		if valueIf != nil {
-			value = valueIf.(string)
-		}
-
-		return self.String(value)
-
-	})
-
-	v.Get("/set", func(self *macross.Context) error {
-
-		val := self.QueryParam("v")
-		if len(val) == 0 {
-			val = "value"
-		}
-
-		err := self.Session.Set("key", val)
-		if err != nil {
-			log.Printf("sess.set %v \n", err)
-		}
-		return self.String("okay")
-	})
-
-	v.Listen(7777)
-}
-
-```
-
-## Getting Started via i18n
-
-```go
-package main
-
-import (
-	"fmt"
-	"github.com/insionng/macross"
-	"github.com/macross-contrib/i18n"
-)
-
-func main() {
-	m := macross.Classic()
-	m.Use(i18n.I18n(i18n.Options{
-		Directory:   "locale",
-		DefaultLang: "zh-CN",
-		Langs:       []string{"en-US", "zh-CN"},
-		Names:       []string{"English", "简体中文"},
-		Redirect:    true,
-	}))
-
-	m.Get("/", func(self *macross.Context) error {
-		fmt.Println("Header>", self.Request.Header.String())
-		return self.String("current language is " + self.Language())
-	})
-
-	// Use in handler.
-	m.Get("/trans", func(self *macross.Context) error {
-		fmt.Println("Header>", self.Request.Header.String())
-		return self.String(fmt.Sprintf("hello %s", self.Tr("world")))
-	})
-
-	fmt.Println("Listen on 9999")
-	m.Listen(9999)
-}
-
-```
-
-
-## Getting Started via Go template
-
-```go
-package main
-
-import (
-	"github.com/insionng/macross"
-	"github.com/insionng/macross/gonder"
-	"github.com/insionng/macross/logger"
-	"github.com/insionng/macross/recover"
-	"github.com/insionng/macross/static"
-)
-
-func main() {
-	v := macross.New()
-	v.Use(logger.Logger())
-	v.Use(recover.Recover())
-	v.SetRenderer(gonder.Renderor())
-	v.Use(static.Static("static"))
-	v.Get("/", func(self *macross.Context) error {
-		var data = make(map[string]interface{})
-		data["name"] = "Insion Ng"
-		self.SetStore(data)
-
-		self.SetStore(map[string]interface{}{
-			"title": "你好，世界",
-			"oh":    "no",
-		})
-		self.Set("oh", "yes") //覆盖前面指定KEY
-		return self.Render("index")
-	})
-
-	v.Listen(":9000")
-}
-
-```
-
-templates/index.html
-```html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/static/index.js" charset="utf-8"></script>
-<title>{{ .title }}</title>
-</head>
-<body>
-    <p>{{ .oh }}</p
-    <p>{{ .name }}</p>
-</body>
-</html>
-
-```
-
-
-
-## Getting Started via Pongo template
-
-```go
-package main
-
-import (
-	"github.com/insionng/macross"
-	"github.com/insionng/macross/logger"
-	"github.com/insionng/macross/pongor"
-	"github.com/insionng/macross/recover"
-	"github.com/insionng/macross/static"
-)
-
-func main() {
-	v := macross.New()
-	v.Use(logger.Logger())
-	v.Use(recover.Recover())
-	v.SetRenderer(pongor.Renderor())
-	v.Use(static.Static("static"))
-	v.Get("/", func(self *macross.Context) error {
-		var data = make(map[string]interface{})
-		data["name"] = "Insion Ng"
-		self.SetStore(data)
-
-		self.SetStore(map[string]interface{}{
-			"title": "你好，世界",
-			"oh":    "no",
-		})
-		self.Set("oh", "yes") //覆盖前面指定KEY
-		return self.Render("index")
-	})
-
-	v.Listen(":9000")
-}
-
-```
-
-templates/index.html
-```html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/static/index.js" charset="utf-8"></script>
-<title>{{ title }}</title>
-</head>
-<body>
-    <p>{{ oh }}</p
-    <p>{{ name }}</p>
-</body>
-</html>
-
-```
-
-## Getting Started via FastTemplate
-
-```go
-package main
-
-import (
-	"github.com/insionng/macross"
-	"github.com/insionng/macross/fempla"
-	"github.com/insionng/macross/logger"
-	"github.com/insionng/macross/recover"
-	"github.com/insionng/macross/static"
-)
-
-func main() {
-
-	v := macross.New()
-	v.Use(logger.Logger())
-	v.Use(recover.Recover())
-	v.SetRenderer(fempla.Renderor())
-	v.Use(static.Static("static"))
-	v.Get("/", func(self *macross.Context) error {
-		data := make(map[string]interface{})
-		data["oh"] = "no"
-		data["name"] = "Insion Ng"
-		self.Set("title", "你好，世界")
-		self.SetStore(data)
-		self.Set("oh", "yes")
-		return self.Render("index")
-	})
-
-	v.Listen(":9000")
-
-}
-
-```
-
-templates/index.html
-```html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/static/index.js" charset="utf-8"></script>
-<title>{{title}}</title>
-</head>
-<body>
-    <p>
-        {{oh}}
-    </p>
-    <p>
-        {{name}}
-    </p>
-</body>
-</html>
-
-```
-
-
-### Routes
-
-macross works by building a macross table in a macross and then dispatching HTTP requests to the matching handlers 
-found in the macross table. An intuitive illustration of a macross table is as follows:
-
-
-Routes              |  Handlers
---------------------|-----------------
-`GET /users`        |  m1, m2, h1, ...
-`POST /users`       |  m1, m2, h2, ...
-`PUT /users/<id>`   |  m1, m2, h3, ...
-`DELETE /users/<id>`|  m1, m2, h4, ...
-
-
-For an incoming request `GET /users`, the first route would match and the handlers m1, m2, and h1 would be executed.
-If the request is `PUT /users/123`, the third route would match and the corresponding handlers would be executed.
-Note that the token `<id>` can match any number of non-slash characters and the matching part can be accessed as 
-a path parameter value in the handlers.
-
-**If an incoming request matches multiple routes in the table, the route added first to the table will take precedence.
-All other matching routes will be ignored.**
-
-The actual implementation of the macross table uses a variant of the radix tree data structure, which makes the macross
-process as fast as working with a hash table.
-
-To add a new route and its handlers to the macross table, call the `To` method like the following:
+  2. dvc pull - should be prompted to login into google account.
+
+  3. Modify data
+
+  4. dvc add [data_file]
+
+  5. Commit changes to [data_file].csv.dvc to git
+
+  6. dvc push
   
-```go
-m := macross.New()
-m.To("GET", "/users", m1, m2, h1)
-m.To("POST", "/users", m1, m2, h2)
-```
-
-You can also use shortcut methods, such as `Get`, `Post`, `Put`, etc., which are named after the HTTP method names:
- 
-```go
-m.Get("/users", m1, m2, h1)
-m.Post("/users", m1, m2, h2)
-```
-
-If you have multiple routes with the same URL path but different HTTP methods, like the above example, you can 
-chain them together as follows,
-
-```go
-m.Get("/users", m1, m2, h1).Post(m1, m2, h2)
-```
-
-If you want to use the same set of handlers to handle the same URL path but different HTTP methods, you can take
-the following shortcut:
-
-```go
-m.To("GET,POST", "/users", m1, m2, h)
-```
-
-A route may contain parameter tokens which are in the format of `<name:pattern>`, where `name` stands for the parameter
-name, and `pattern` is a regular expression which the parameter value should match. A token `<name>` is equivalent
-to `<name:[^/]*>`, i.e., it matches any number of non-slash characters. At the end of a route, an asterisk character
-can be used to match any number of arbitrary characters. Below are some examples:
-
-* `/users/<username>`: matches `/users/root`
-* `/users/accnt-<id:\d+>`: matches `/users/accnt-123`, but not `/users/accnt-root`
-* `/users/<username>/*`: matches `/users/root/profile/address`
-
-When a URL path matches a route, the matching parameters on the URL path can be accessed via `Context.Param()`:
-
-```go
-m := macross.New()
-
-m.Get("/users/<username>", func (self *macross.Context) error {
-	username := self.Param("username").String()
-	s := fmt.Sprintf("Name: %s", username)
-	return self.String(s)
-})
-```
-
-
-### Route Groups
-
-Route group is a way of grouping together the routes which have the same route prefix. The routes in a group also
-share the same handlers that are registered with the group via its `Use` method. For example,
-
-```go
-m := macross.New()
-api := m.Group("/api")
-api.Use(m1, m2)
-api.Get("/users", h1).Post(h2)
-api.Put("/users/<id>", h3).Delete(h4)
-```
-
-The above `/api` route group establishes the following macross table:
-
-
-Routes                  |  Handlers
-------------------------|-------------
-`GET /api/users`        |  m1, m2, h1, ...
-`POST /api/users`       |  m1, m2, h2, ...
-`PUT /api/users/<id>`   |  m1, m2, h3, ...
-`DELETE /api/users/<id>`|  m1, m2, h4, ...
-
-
-As you can see, all these routes have the same route prefix `/api` and the handlers `m1` and `m2`. In other similar
-macross frameworks, the handlers registered with a route group are also called *middlewares*.
-
-Route groups can be nested. That is, a route group can create a child group by calling the `Group()` method. The macross
-serves as the top level route group. A child group inherits the handlers registered with its parent group. For example, 
-
-```go
-m := macross.New()
-m.Use(m1)
-
-api := m.Group("/api")
-api.Use(m2)
-
-users := group.Group("/users")
-users.Use(m3)
-users.Put("/<id>", h1)
-```
-
-Because the macross serves as the parent of the `api` group which is the parent of the `users` group, 
-the `PUT /api/users/<id>` route is associated with the handlers `m1`, `m2`, `m3`, and `h1`.
-
-
-### Router
-
-Router manages the macross table and dispatches incoming requests to appropriate handlers. A macross instance is created
-by calling the `macross.New()` method.
-
-To hook up macross with fasthttp, use the following code:
-
-```go
-m := macross.New()
-m.Listen(":9000") 
-```
-
-
-### Handlers
-
-A handler is a function with the signature `func(*macross.Context) error`. A handler is executed by the macross if
-the incoming request URL path matches the route that the handler is associated with. Through the `macross.Context` 
-parameter, you can access the request information in handlers.
-
-A route may be associated with multiple handlers. These handlers will be executed in the order that they are registered
-to the route. The execution sequence can be terminated in the middle using one of the following two methods:
-
-* A handler returns an error: the macross will skip the rest of the handlers and handle the returned error.
-* A handler calls `Context.Abort()` and `Context.Break()`: the macross will simply skip the rest of the handlers. There is no error to be handled.
- 
-A handler can call `Context.Next()` to explicitly execute the rest of the unexecuted handlers and take actions after
-they finish execution. For example, a response compression handler may start the output buffer, call `Context.Next()`,
-and then compress and send the output to response.
-
-
-### Context
-
-For each incoming request, a `macross.Context` object is passed through the relevant handlers. Because `macross.Context`
-embeds `fasthttp.RequestCtx`, you can access all properties and methods provided by the latter.
- 
-Additionally, the `Context.Param()` method allows handlers to access the URL path parameters that match the current route.
-Using `Context.Get()` , `Context.GetStore()` and `Context.Set()` , `Context.SetStore()`, handlers can share data between each other. For example, an authentication
-handler can store the authenticated user identity by calling `Context.Set()`, and other handlers can retrieve back
-the identity information by calling `Context.Get()`.
-
-Context also provides a handy `Data()` method that can be used to write data of arbitrary type to the response.
-The `Data()` method can also be overridden (by replacement) to achieve more versatile response data writing. 
-
-
-### Error Handling
-
-A handler may return an error indicating some erroneous condition. Sometimes, a handler or the code it calls may cause
-a panic. Both should be handled properly to ensure best user experience. It is recommended that you use 
-the `fault.Recover` handler or a similar error handler to handle these errors.
-
-If an error is not handled by any handler, the macross will handle it by calling its `HandleError()` method which
-simply sets an appropriate HTTP status code and writes the error message to the response.
-
-When an incoming request has no matching route, the macross will call the handlers registered via the `Router.NotFound()`
-method. All the handlers registered via `Router.Use()` will also be called in advance. By default, the following two
-handlers are registered with `Router.NotFound()`:
-
-* `macross.MethodNotAllowedHandler`: a handler that sends an `Allow` HTTP header indicating the allowed HTTP methods for a requested URL
-* `macross.NotFoundHandler`: a handler triggering 404 HTTP error
-
-
-### Middleware
-
-* [Cache](https://github.com/macross-contrib/cache): `Middleware cache provides cache management for Macross. It can use many cache adapters, including memory, file, Redis.`
-* [Session](https://github.com/macross-contrib/session): `The session package is a Macross session manager. It can use many session providers.`
-* [I18n](https://github.com/macross-contrib/i18n): `Middleware i18n provides app Internationalization and Localization for Macross.`
-* [Macrus](https://github.com/macross-contrib/macrus): `Package macrus provides a middleware for macross that logs request details via the logrus logging library.`
-* [Statio](https://github.com/macross-contrib/statio): `serves static files and http file system.`
-* [Captcha](https://github.com/macross-contrib/captcha): `Middleware captcha provides captcha service for Macross).`
-* [Macrof](https://github.com/macross-contrib/macrof): `A wrapper for macross to use net/http/pprof easily.`
-
-
-### Contributes
-
-Thanks to the fasthttp, com, echo/vodka, iris, gin, beego, fasthttp-routing, FastTemplate, Pongo2, Jwt-go. And all other Go package dependencies projects
-
-
-### Recipes
-
-- [Yougam](http://www.yougam.com/) the discuss system project
-- [Vuejsto](https://github.com/macross-contrib/vuejsto) the vue.js + macross example project
-- [Drupapp](https://github.com/insionng/drupapp) the drupal models + macross project

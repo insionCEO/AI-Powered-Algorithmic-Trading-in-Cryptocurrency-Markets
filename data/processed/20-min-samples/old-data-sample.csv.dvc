@@ -1,0 +1,4 @@
+outs:
+- md5: faae0a9c29a0e77b1177237161a6ed31
+  size: 35755
+  path: old-data-sample.csv

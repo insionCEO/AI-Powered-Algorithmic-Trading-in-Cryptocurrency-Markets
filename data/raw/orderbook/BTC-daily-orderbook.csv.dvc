@@ -1,0 +1,4 @@
+outs:
+- md5: cb4a4ed11c4f536872b6e87a7c046260
+  size: 2650082877
+  path: BTC-daily-orderbook.csv

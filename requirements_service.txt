@@ -1,0 +1,7 @@
+pandas==1.5.3
+websockets
+numpy~=1.23.5
+torch --index-url https://download.pytorch.org/whl/cpu
+einops
+gymnasium
+scikit-learn

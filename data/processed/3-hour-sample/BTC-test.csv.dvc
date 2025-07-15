@@ -1,0 +1,4 @@
+outs:
+- md5: bbe2d03a7d4f53a83d132968608ae142
+  size: 64855
+  path: BTC-test.csv
