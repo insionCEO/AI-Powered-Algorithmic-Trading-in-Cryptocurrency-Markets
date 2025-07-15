@@ -1,4 +1,4 @@
-# TradeAI: Advancing Algorithmic Trading Systems with Deep Learning for Cryptocurrency Data
+# AI-Powered Algorithmic Trading in Cryptocurrency Markets
 
 ## Introduction
 
